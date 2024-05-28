@@ -98,6 +98,9 @@ public class Function {
             partidos.add(partido);
             // System.out.println(partido.getEquipo1() + partido.getEquipo2() + partido.getMarcador1() + partido.getMarcador2());
             calcularPuntos(indice1, indice2);
+            equipoMasGoles();
+            equipoMasPuntos();
+            equipoMasPartidosGanados();
         }
     }
 
@@ -129,7 +132,7 @@ public class Function {
             indiceE1.setPp(indiceE1.getPp() + 1);
             indiceE1.setGc(indiceE1.getGc() + (-1)*difGoles);
         }
-        /*  System.out.println(indiceE1.getNombre());
+            System.out.println(indiceE1.getNombre());
             System.out.println("PJ " + indiceE1.getPj());
             System.out.println("PG " + indiceE1.getPg());
             System.out.println("PP " + indiceE1.getPp());
@@ -144,6 +147,54 @@ public class Function {
             System.out.println("PE " + indiceE2.getPe());
             System.out.println("GF " + indiceE2.getGf());
             System.out.println("GC " + indiceE2.getGc());
-            System.out.println("TP " + indiceE2.getTp()); */
+            System.out.println("TP " + indiceE2.getTp());
+    }
+
+    public void equipoMasGoles() {
+        String nombreEquipo = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        int refGoles = 0;
+        int i = 0;
+        do {
+            Equipo equi = equipos.get(i);
+            int golesF = equi.getGf();
+            if (golesF > refGoles) {
+                refGoles = golesF;
+                nombreEquipo = equi.getNombre();
+            }
+            i++;
+        } while (i <= equipos.size() - 1);
+        System.out.println("Equipo con más goles" + nombreEquipo);
+    }
+
+    public void equipoMasPuntos() {
+        String nombreEquipo = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        int refPuntos = 0;
+        int i = 0;
+        do {
+            Equipo equi = equipos.get(i);
+            int totalPuntos = equi.getTp();
+            if (totalPuntos > refPuntos) {
+                refPuntos = totalPuntos;
+                nombreEquipo = equi.getNombre();
+            }
+            i++;
+        } while (i <= equipos.size() - 1);
+        System.out.println("Equipo con más puntos" + nombreEquipo);
+    }
+
+    public void equipoMasPartidosGanados() {
+        String nombreEquipo = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        int refPartidosGanados = 0;
+        int i = 0;
+        do {
+            Equipo equi = equipos.get(i);
+            int partidosGanados = equi.getPg();
+            if (partidosGanados > refPartidosGanados) {
+                refPartidosGanados = partidosGanados;
+                nombreEquipo = equi.getNombre();
+            }
+            i++;
+        } while (i <= equipos.size() - 1);
+        System.out.println("Equipo con más partidos ganados" + nombreEquipo);
     }
 }

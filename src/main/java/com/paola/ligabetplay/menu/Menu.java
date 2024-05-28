@@ -1,7 +1,9 @@
 package com.paola.ligabetplay.menu;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import com.paola.ligabetplay.functions.Function;
+import com.paola.ligabetplay.models.Equipo;
 
 public class Menu {
 
@@ -37,11 +39,10 @@ public class Menu {
                     funciones.registrarPartido();
                     break;
                 case 3:
-                    System.out.println("3");
                     mostrarMenuR();
                     break;
                 case 4:
-                    System.out.println("Salir");
+                    System.out.println("GRACIAS POR USAR EL SERVICIO");
                     break;
                 default:
                     System.out.println("Ingrese una opción válida");
@@ -57,6 +58,7 @@ public class Menu {
 
     public void mostrarMenuR() {
         Scanner sc = new Scanner(System.in);
+        Function funciones = new Function();
         int eleccion;
         do {
             mostrarR();
@@ -64,7 +66,7 @@ public class Menu {
             eleccion = sc.nextInt();
             switch (eleccion) {
                 case 1:
-                    System.out.println("1");
+                    // funciones.equipoMasGoles();
                     break;
                 case 2:
                     System.out.println("2");
@@ -79,7 +81,6 @@ public class Menu {
                     System.out.println("5");
                     break;
                 case 6:
-                    System.out.println("Salir");
                     break;
                 default:
                     System.out.println("Ingrese una opción válida");
