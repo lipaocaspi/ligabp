@@ -1,11 +1,7 @@
 package com.paola.ligabetplay.menu;
 
-import java.util.ArrayList;
 import java.util.Scanner;
-
 import com.paola.ligabetplay.functions.Function;
-import com.paola.ligabetplay.models.Equipo;
-import com.paola.ligabetplay.models.Partido;
 
 public class Menu {
 
@@ -52,7 +48,6 @@ public class Menu {
                     break;
             }
         } while (eleccion != 4);
-        sc.close();
     }
 
     private void mostrarP() {
