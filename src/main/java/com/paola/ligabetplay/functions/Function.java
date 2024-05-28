@@ -29,72 +29,75 @@ public class Function {
         // System.out.println(equipo.getNombre());
     }
 
+    public int buscarEquipo(int numEquipo, String nombre, Partido partido) {
+        int indice;
+        for (indice = 0; indice <= equipos.size() - 1; indice++) {
+            Equipo equi = equipos.get(indice);
+            String nombreEqui = equi.getNombre();
+            if (nombreEqui.equals(nombre)) {
+                if (numEquipo == 1) {
+                    partido.setEquipo1(nombre);
+                } else {
+                    partido.setEquipo2(nombre);
+                }
+                break;
+            } else if (indice == equipos.size() - 1) {
+                System.out.println("El equipo no se encuentra registrado");
+                indice = -1;
+                break;
+            }
+        }
+        return indice;
+    }
+
+    public boolean verificarValor(int numEquipo, Boolean valorValido, Partido partido, int valor) {
+        if (valor >= 0) {
+            if (numEquipo == 1) {
+                partido.setMarcador1(valor);
+            } else {
+                partido.setMarcador2(valor);
+            }
+            valorValido = true;
+        } else {
+            System.out.println("Ingrese un valor válido");
+            valorValido = false;
+        }
+        return valorValido;
+    }
+
     public void registrarPartido() {
         if (equipos.size() < 2) {
             System.out.println("No hay suficientes equipos registrados");
         } else {
-            Boolean equipoExiste = false;
+            int indice;
             Partido partido = new Partido();
-            // sc.nextLine();
             System.out.println("Ingrese la fecha del partido: ");
             partido.setFecha(sc.nextLine());
             do {
                 System.out.println("Ingrese el nombre del equipo local: ");
                 String nombre = sc.nextLine();
-                for (int i = 0; i <= equipos.size() - 1; i++) {
-                    Equipo equi = equipos.get(i);
-                    String nombreEqui = equi.getNombre();
-                    if (nombreEqui.equals(nombre)) {
-                        partido.setEquipo1(nombre);
-                        equipoExiste = true;
-                        break;
-                    } else if (i == equipos.size() - 1) {
-                        System.out.println("El equipo no se encuentra registrado");
-                    }
-                }
-            } while (equipoExiste == false);
-            equipoExiste = false;
+                indice = buscarEquipo(1, nombre, partido);
+            } while (indice == -1);
+            indice = -1;
             do {
                 System.out.println("Ingrese el nombre del equipo visitante: ");
                 String nombre = sc.nextLine();
-                for (int i = 0; i <= equipos.size() - 1; i++) {
-                    Equipo equi = equipos.get(i);
-                    String nombreEqui = equi.getNombre();
-                    if (nombreEqui.equals(nombre)) {
-                        partido.setEquipo2(nombre);
-                        equipoExiste = true;
-                        break;
-                    } else if (i == equipos.size() - 1) {
-                        System.out.println("El equipo no se encuentra registrado");
-                    }
-                }
-            } while (equipoExiste == false);
+                indice = buscarEquipo(2, nombre, partido);
+            } while (indice == -1);
             Boolean valorValido = false;
             do {
                 System.out.println("Ingrese el número de goles del equipo local: ");
                 marcador1 = sc.nextInt();
-                if (marcador1 >= 0) {
-                    partido.setMarcador1(marcador1);
-                    valorValido = true;
-                    break;
-                } else {
-                    System.out.println("Ingrese un valor válido");
-                }
+                valorValido = verificarValor(1, valorValido, partido, marcador1);
             } while (valorValido == false);
             valorValido = false;
             do {
                 System.out.println("Ingrese el número de goles del equipo visitante: ");
                 marcador2 = sc.nextInt();
-                if (marcador2 >= 0) {
-                    partido.setMarcador2(marcador2);
-                    valorValido = true;
-                    break;
-                } else {
-                    System.out.println("Ingrese un valor válido");
-                }
+                valorValido = verificarValor(2, valorValido, partido, marcador2);
             } while (valorValido == false);
             partidos.add(partido);
-            System.out.println(partido.getEquipo1() + partido.getEquipo2() + partido.getMarcador1() + partido.getMarcador2());
+            // System.out.println(partido.getEquipo1() + partido.getEquipo2() + partido.getMarcador1() + partido.getMarcador2());
         }
     }
 
