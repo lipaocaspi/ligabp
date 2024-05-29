@@ -1,5 +1,4 @@
 package com.paola.ligabetplay.menu;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 import com.paola.ligabetplay.functions.Function;
@@ -26,18 +25,20 @@ public class Menu {
         5. Promedio de goles anotados
         6. Salir al menú principal
         """;
+    
+    static String titulo = """
+            ************
+            LIGA BETPLAY
+            ************
+            """;
 
     public void mostrarMenuP() {
-        Scanner sc = new Scanner(System.in);
         Function funciones = new Function();
         int eleccion;
         Boolean partidosIguales;
         do {
             mostrarP();
-            System.out.println("---");
-            System.out.println("Ingrese la opción: ");
-            System.out.println("---");
-            eleccion = sc.nextInt();
+            eleccion = funciones.verificarValor("Ingrese la opción: ");
             switch (eleccion) {
                 case 1:
                     equipos = funciones.registrarEquipo();
@@ -74,9 +75,7 @@ public class Menu {
     }
 
     private void mostrarP() {
-        System.out.println("*************");
-        System.out.println("LIGA BET PLAY");
-        System.out.println("*************");
+        System.out.println(titulo);
         System.out.println(listaMenuP);
     }
 
@@ -86,10 +85,7 @@ public class Menu {
         int eleccion;
         do {
             mostrarR();
-            System.out.println("---");
-            System.out.println("Ingrese la opción de reporte: ");
-            System.out.println("---");
-            eleccion = sc.nextInt();
+            eleccion = funciones.verificarValor("Ingrese la opción de reporte: ");
             switch (eleccion) {
                 case 1:
                     funciones.equipoMasGoles(equipos);
@@ -118,13 +114,10 @@ public class Menu {
                     break;
             }
         } while (eleccion != 6);
-        // sc.close();
     }
 
     private void mostrarR() {
-        System.out.println("*************");
-        System.out.println("LIGA BET PLAY");
-        System.out.println("*************");
+        System.out.println(titulo);
         System.out.println(listaMenuR);
     }
 }

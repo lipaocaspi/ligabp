@@ -1,9 +1,7 @@
 package com.paola.ligabetplay.functions;
-
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
 import com.paola.ligabetplay.models.Equipo;
 import com.paola.ligabetplay.models.Partido;
 
@@ -31,6 +29,9 @@ public class Function {
             equipo.setGc(0);
             equipo.setTp(0);
             equipos.add(equipo);
+            System.out.println("---");
+            System.out.println("Equipo registrado");
+            System.out.println("---");
         } else {
             do {
                 System.out.println("---");
@@ -56,6 +57,9 @@ public class Function {
                         equipo.setGc(0);
                         equipo.setTp(0);
                         equipos.add(equipo);
+                        System.out.println("---");
+                        System.out.println("Equipo registrado");
+                        System.out.println("---");
                         existe = true;
                         break;
                     }
@@ -93,7 +97,7 @@ public class Function {
         return indice;
     }
 
-    public int verificarValor(Partido partido, String mensaje) {
+    public int verificarValor(String mensaje) {
         while (true) {
             try {
                 System.out.println("---");
@@ -118,8 +122,6 @@ public class Function {
 
     public ArrayList<Partido> registrarPartido() {
         Scanner sc = new Scanner(System.in);
-        int valor1;
-        int valor2;
         if (equipos.size() < 2) {
             System.out.println("---");
             System.out.println("No hay suficientes equipos registrados");
@@ -147,12 +149,15 @@ public class Function {
                 indice2 = buscarEquipo(2, nombre, partido);
             } while (indice2 == -1);
             String mensaje = "Ingrese el número de goles del equipo local: ";
-            marcador1 = verificarValor(partido, mensaje);
+            marcador1 = verificarValor(mensaje);
             partido.setMarcador1(marcador1);
             mensaje = "Ingrese el número de goles del equipo visitante: ";
-            marcador2 = verificarValor(partido, mensaje);
+            marcador2 = verificarValor(mensaje);
             partido.setMarcador2(marcador2);
             partidos.add(partido);
+            System.out.println("---");
+            System.out.println("Partido registrado");
+            System.out.println("---");
             calcularPuntos(indice1, indice2);
         }
         return partidos;

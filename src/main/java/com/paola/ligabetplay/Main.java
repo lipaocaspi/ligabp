@@ -1,5 +1,4 @@
 package com.paola.ligabetplay;
-
 import com.paola.ligabetplay.menu.Menu;
 
 public class Main {
