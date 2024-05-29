@@ -9,6 +9,7 @@ import com.paola.ligabetplay.models.Partido;
 public class Menu {
     ArrayList<Equipo> equipos = new ArrayList<>();
     ArrayList<Partido> partidos = new ArrayList<>();
+    int numeroGoles;
 
     static String listaMenuP = """
         1. Registrar Equipo
@@ -43,7 +44,9 @@ public class Menu {
                     break;
                 case 3:
                     if (equipos.isEmpty() || partidos.isEmpty()) {
+                        System.out.println("---");
                         System.out.println("No se encuentran equipos/partidos registrados");
+                        System.out.println("---");
                     } else {
                         mostrarMenuR(equipos, partidos);
                     }
@@ -52,20 +55,22 @@ public class Menu {
                     System.out.println("GRACIAS POR USAR EL SERVICIO");
                     break;
                 default:
+                    System.out.println("---");
                     System.out.println("Ingrese una opción válida");
+                    System.out.println("---");
                     break;
             }
         } while (eleccion != 4);
     }
 
     private void mostrarP() {
+        System.out.println("*************");
         System.out.println("LIGA BET PLAY");
+        System.out.println("*************");
         System.out.println(listaMenuP);
     }
 
     public void mostrarMenuR(ArrayList<Equipo> equipos, ArrayList<Partido> partidos) {
-        // System.out.println("Tamaño equipos: " + equipos.size());
-        // System.out.println("Tamaño partidos: " + partidos.size());
         Scanner sc = new Scanner(System.in);
         Function funciones = new Function();
         int eleccion;
@@ -84,15 +89,20 @@ public class Menu {
                     funciones.equipoMasPartidosGanados(equipos);
                     break;
                 case 4:
-                    funciones.totalGoles(equipos);
+                    numeroGoles = funciones.totalGoles(equipos);
+                    System.out.println("---");
+                    System.out.println("Número de goles anotados en el torneo: " + numeroGoles);
+                    System.out.println("---");
                     break;
                 case 5:
-                    funciones.promedioGoles(equipos);
+                    funciones.promedioGoles(equipos, numeroGoles);
                     break;
                 case 6:
                     break;
                 default:
+                    System.out.println("---");
                     System.out.println("Ingrese una opción válida");
+                    System.out.println("---");
                     break;
             }
         } while (eleccion != 6);
@@ -100,7 +110,9 @@ public class Menu {
     }
 
     private void mostrarR() {
+        System.out.println("*************");
         System.out.println("LIGA BET PLAY");
+        System.out.println("*************");
         System.out.println(listaMenuR);
     }
 }
