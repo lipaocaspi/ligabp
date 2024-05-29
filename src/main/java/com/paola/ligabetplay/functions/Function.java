@@ -158,6 +158,18 @@ public class Function {
         return partidos;
     }
 
+    public Boolean verificarPartidos(ArrayList<Equipo> equipos) {
+        int valorBase = equipos.get(0).getPj();
+        for (int i = 1; i<= equipos.size() - 1; i++) {
+            Equipo equi = equipos.get(i);
+            int partidosJugados = equi.getPj();
+            if (partidosJugados != valorBase) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void calcularPuntos(int indice1, int indice2) {
         int difGoles = marcador1 - marcador2;
         Equipo indiceE1 = equipos.get(indice1);
@@ -192,7 +204,7 @@ public class Function {
             indiceE1.setGt(indiceE1.getGt() + marcador1);
             indiceE1.setGc(indiceE1.getGc() + (-1)*difGoles);
         }
-        System.out.println(indiceE1.getNombre());
+        /* System.out.println(indiceE1.getNombre());
         System.out.println("PJ " + indiceE1.getPj());
         System.out.println("PG " + indiceE1.getPg());
         System.out.println("PP " + indiceE1.getPp());
@@ -207,7 +219,7 @@ public class Function {
         System.out.println("PE " + indiceE2.getPe());
         System.out.println("GF " + indiceE2.getGf());
         System.out.println("GC " + indiceE2.getGc());
-        System.out.println("TP " + indiceE2.getTp());
+        System.out.println("TP " + indiceE2.getTp());*/
     }
 
     public void equipoMasGoles(ArrayList<Equipo> equipos) {

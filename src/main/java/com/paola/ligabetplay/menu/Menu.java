@@ -31,6 +31,7 @@ public class Menu {
         Scanner sc = new Scanner(System.in);
         Function funciones = new Function();
         int eleccion;
+        Boolean partidosIguales;
         do {
             mostrarP();
             System.out.println("---");
@@ -45,9 +46,14 @@ public class Menu {
                     partidos = funciones.registrarPartido();
                     break;
                 case 3:
+                    partidosIguales = funciones.verificarPartidos(equipos);
                     if (equipos.isEmpty() || partidos.isEmpty()) {
                         System.out.println("---");
                         System.out.println("No se encuentran equipos/partidos registrados");
+                        System.out.println("---");
+                    } else if (partidosIguales == false) {
+                        System.out.println("---");
+                        System.out.println("Deben haber el mismo número de partidos registrados para cada equipo");
                         System.out.println("---");
                     } else {
                         mostrarMenuR(equipos, partidos);
