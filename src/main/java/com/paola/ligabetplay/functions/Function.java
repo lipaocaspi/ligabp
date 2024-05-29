@@ -1,6 +1,7 @@
 package com.paola.ligabetplay.functions;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.paola.ligabetplay.models.Equipo;
@@ -17,7 +18,9 @@ public class Function {
         Equipo equipo = new Equipo();
         Boolean existe = false;
         if (equipos.isEmpty()) {
+            System.out.println("---");
             System.out.println("Ingrese el nombre del equipo: ");
+            System.out.println("---");
             String nombre = sc.nextLine();
             equipo.setNombre(nombre);
             equipo.setPj(0);
@@ -30,7 +33,9 @@ public class Function {
             equipos.add(equipo);
         } else {
             do {
+                System.out.println("---");
                 System.out.println("Ingrese el nombre del equipo: ");
+                System.out.println("---");
                 String nombre = sc.nextLine();
                 for (int indice = 0; indice <= equipos.size() - 1; indice++) {
                     Equipo equi = equipos.get(indice);
@@ -88,25 +93,33 @@ public class Function {
         return indice;
     }
 
-    public boolean verificarValor(int numEquipo, Boolean valorValido, Partido partido, int valor) {
-        if (valor >= 0) {
-            if (numEquipo == 1) {
-                partido.setMarcador1(valor);
-            } else {
-                partido.setMarcador2(valor);
+    public int verificarValor(Partido partido, String mensaje) {
+        while (true) {
+            try {
+                System.out.println("---");
+                System.out.println(mensaje);
+                System.out.println("---");
+                Scanner sc = new Scanner(System.in);
+                int valor = sc.nextInt();
+                if (valor >= 0) {
+                    return valor;
+                } else {
+                    System.out.println("---");
+                    System.out.println("Ingrese un valor válido");
+                    System.out.println("---");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("---");
+                System.out.println("Tipo de dato incorrecto");
+                System.out.println("---");
             }
-            valorValido = true;
-        } else {
-            System.out.println("---");
-            System.out.println("Ingrese un valor válido");
-            System.out.println("---");
-            valorValido = false;
         }
-        return valorValido;
     }
 
     public ArrayList<Partido> registrarPartido() {
         Scanner sc = new Scanner(System.in);
+        int valor1;
+        int valor2;
         if (equipos.size() < 2) {
             System.out.println("---");
             System.out.println("No hay suficientes equipos registrados");
@@ -115,30 +128,30 @@ public class Function {
             int indice1;
             int indice2;
             Partido partido = new Partido();
+            System.out.println("---");
             System.out.println("Ingrese la fecha del partido: ");
+            System.out.println("---");
             partido.setFecha(sc.nextLine());
             do {
+                System.out.println("---");
                 System.out.println("Ingrese el nombre del equipo local: ");
+                System.out.println("---");
                 String nombre = sc.nextLine();
                 indice1 = buscarEquipo(1, nombre, partido);
             } while (indice1 == -1);
             do {
+                System.out.println("---");
                 System.out.println("Ingrese el nombre del equipo visitante: ");
+                System.out.println("---");
                 String nombre = sc.nextLine();
                 indice2 = buscarEquipo(2, nombre, partido);
             } while (indice2 == -1);
-            Boolean valorValido = false;
-            do {
-                System.out.println("Ingrese el número de goles del equipo local: ");
-                marcador1 = sc.nextInt();
-                valorValido = verificarValor(1, valorValido, partido, marcador1);
-            } while (valorValido == false);
-            valorValido = false;
-            do {
-                System.out.println("Ingrese el número de goles del equipo visitante: ");
-                marcador2 = sc.nextInt();
-                valorValido = verificarValor(2, valorValido, partido, marcador2);
-            } while (valorValido == false);
+            String mensaje = "Ingrese el número de goles del equipo local: ";
+            marcador1 = verificarValor(partido, mensaje);
+            partido.setMarcador1(marcador1);
+            mensaje = "Ingrese el número de goles del equipo visitante: ";
+            marcador2 = verificarValor(partido, mensaje);
+            partido.setMarcador2(marcador2);
             partidos.add(partido);
             calcularPuntos(indice1, indice2);
         }
@@ -179,9 +192,6 @@ public class Function {
             indiceE1.setGt(indiceE1.getGt() + marcador1);
             indiceE1.setGc(indiceE1.getGc() + (-1)*difGoles);
         }
-        System.out.println("*******************");
-        System.out.println("TABLA DE POSICIONES");
-        System.out.println("*******************");
         System.out.println(indiceE1.getNombre());
         System.out.println("PJ " + indiceE1.getPj());
         System.out.println("PG " + indiceE1.getPg());

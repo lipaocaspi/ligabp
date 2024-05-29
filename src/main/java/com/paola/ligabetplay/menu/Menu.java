@@ -33,7 +33,9 @@ public class Menu {
         int eleccion;
         do {
             mostrarP();
+            System.out.println("---");
             System.out.println("Ingrese la opción: ");
+            System.out.println("---");
             eleccion = sc.nextInt();
             switch (eleccion) {
                 case 1:
@@ -52,7 +54,9 @@ public class Menu {
                     }
                     break;
                 case 4:
+                    System.out.println("****************************");
                     System.out.println("GRACIAS POR USAR EL SERVICIO");
+                    System.out.println("****************************");
                     break;
                 default:
                     System.out.println("---");
@@ -76,7 +80,9 @@ public class Menu {
         int eleccion;
         do {
             mostrarR();
+            System.out.println("---");
             System.out.println("Ingrese la opción de reporte: ");
+            System.out.println("---");
             eleccion = sc.nextInt();
             switch (eleccion) {
                 case 1:
