@@ -6,18 +6,20 @@ public class Equipo {
     int pg;
     int pp;
     int pe;
+    int gt;
     int gf;
     int gc;
     int tp;
 
     public Equipo() {}
 
-    public Equipo(String nombre, int pj, int pg, int pp, int pe, int gf, int gc, int tp) {
+    public Equipo(String nombre, int pj, int pg, int pp, int pe, int gt, int gf, int gc, int tp) {
         this.nombre = nombre;
         this.pj = pj;
         this.pg = pg;
         this.pp = pp;
         this.pe = pe;
+        this.gt = gt;
         this.gf = gf;
         this.gc = gc;
         this.tp = tp;
@@ -63,6 +65,14 @@ public class Equipo {
         this.pe = pe;
     }
 
+    public int getGt() {
+        return gt;
+    }
+
+    public void setGt(int gt) {
+        this.gt = gt;
+    }
+
     public int getGf() {
         return gf;
     }
@@ -86,4 +96,5 @@ public class Equipo {
     public void setTp(int tp) {
         this.tp = tp;
     }
+
 }

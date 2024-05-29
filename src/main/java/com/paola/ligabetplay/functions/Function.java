@@ -12,7 +12,7 @@ public class Function {
     int marcador1;
     int marcador2;
 
-    public void registrarEquipo() {
+    public ArrayList<Equipo> registrarEquipo() {
         Scanner sc = new Scanner(System.in);
         Equipo equipo = new Equipo();
         System.out.println("Ingrese el nombre del equipo: ");
@@ -25,6 +25,7 @@ public class Function {
         equipo.setGc(0);
         equipo.setTp(0);
         equipos.add(equipo);
+        return equipos;
     }
 
     public int buscarEquipo(int numEquipo, String nombre, Partido partido) {
@@ -63,7 +64,7 @@ public class Function {
         return valorValido;
     }
 
-    public void registrarPartido() {
+    public ArrayList<Partido> registrarPartido() {
         Scanner sc = new Scanner(System.in);
         if (equipos.size() < 2) {
             System.out.println("No hay suficientes equipos registrados");
@@ -98,10 +99,11 @@ public class Function {
             partidos.add(partido);
             // System.out.println(partido.getEquipo1() + partido.getEquipo2() + partido.getMarcador1() + partido.getMarcador2());
             calcularPuntos(indice1, indice2);
-            equipoMasGoles();
-            equipoMasPuntos();
-            equipoMasPartidosGanados();
+            // equipoMasGoles();
+            // equipoMasPuntos();
+            // equipoMasPartidosGanados();
         }
+        return partidos;
     }
 
     public void calcularPuntos(int indice1, int indice2) {
@@ -111,25 +113,31 @@ public class Function {
         if (difGoles == 0) {
             indiceE1.setPj(indiceE1.getPj() + 1);
             indiceE1.setPe(indiceE1.getPe() + 1);
+            indiceE1.setGt(indiceE1.getGt() + marcador1);
             indiceE1.setTp(indiceE1.getTp() + 1);
             indiceE2.setPj(indiceE2.getPj() + 1);
             indiceE2.setPe(indiceE2.getPe() + 1);
+            indiceE2.setGt(indiceE2.getGt() + marcador2);
             indiceE2.setTp(indiceE2.getTp() + 1);
         } else if (difGoles > 0) {
             indiceE1.setPj(indiceE1.getPj() + 1);
             indiceE1.setPg(indiceE1.getPg() + 1);
+            indiceE1.setGt(indiceE1.getGt() + marcador1);
             indiceE1.setGf(indiceE1.getGf() + difGoles);
             indiceE1.setTp(indiceE1.getTp() + 3);
             indiceE2.setPj(indiceE2.getPj() + 1);
             indiceE2.setPp(indiceE2.getPp() + 1);
+            indiceE2.setGt(indiceE2.getGt() + marcador2);
             indiceE2.setGc(indiceE2.getGc() + difGoles);
         } else {
             indiceE2.setPj(indiceE2.getPj() + 1);
             indiceE2.setPg(indiceE2.getPg() + 1);
+            indiceE2.setGt(indiceE2.getGt() + marcador2);
             indiceE2.setGf(indiceE2.getGf() + (-1)*difGoles);
             indiceE2.setTp(indiceE2.getTp() + 3);
             indiceE1.setPj(indiceE1.getPj() + 1);
             indiceE1.setPp(indiceE1.getPp() + 1);
+            indiceE1.setGt(indiceE1.getGt() + marcador1);
             indiceE1.setGc(indiceE1.getGc() + (-1)*difGoles);
         }
             System.out.println(indiceE1.getNombre());
@@ -150,8 +158,8 @@ public class Function {
             System.out.println("TP " + indiceE2.getTp());
     }
 
-    public void equipoMasGoles() {
-        String nombreEquipo = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    public void equipoMasGoles(ArrayList<Equipo> equipos) {
+        String nombreEquipo = "";
         int refGoles = 0;
         int i = 0;
         do {
@@ -166,8 +174,8 @@ public class Function {
         System.out.println("Equipo con más goles" + nombreEquipo);
     }
 
-    public void equipoMasPuntos() {
-        String nombreEquipo = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    public void equipoMasPuntos(ArrayList<Equipo> equipos) {
+        String nombreEquipo = "";
         int refPuntos = 0;
         int i = 0;
         do {
@@ -182,8 +190,8 @@ public class Function {
         System.out.println("Equipo con más puntos" + nombreEquipo);
     }
 
-    public void equipoMasPartidosGanados() {
-        String nombreEquipo = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    public void equipoMasPartidosGanados(ArrayList<Equipo> equipos) {
+        String nombreEquipo = "";
         int refPartidosGanados = 0;
         int i = 0;
         do {
@@ -196,5 +204,28 @@ public class Function {
             i++;
         } while (i <= equipos.size() - 1);
         System.out.println("Equipo con más partidos ganados" + nombreEquipo);
+    }
+
+    public void totalGoles(ArrayList<Equipo> equipos) {
+        int sumaGoles = 0;
+        int goles;
+        for (int indice = 0; indice <= equipos.size() - 1; indice++) {
+            Equipo equi = equipos.get(indice);
+            goles = equi.getGt();
+            sumaGoles = sumaGoles + goles;
+        }
+        System.out.println("Número de goles anotados en el torneo: " + sumaGoles);
+    }
+
+    public void promedioGoles(ArrayList<Equipo> equipos) {
+        int sumaGoles = 0;
+        int goles;
+        for (int indice = 0; indice <= equipos.size() - 1; indice++) {
+            Equipo equi = equipos.get(indice);
+            goles = equi.getGt();
+            sumaGoles = sumaGoles + goles;
+        }
+        float promedioGoles = sumaGoles/equipos.size();
+        System.out.println("El promedio de goles es: " + promedioGoles);
     }
 }

@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import com.paola.ligabetplay.functions.Function;
 import com.paola.ligabetplay.models.Equipo;
+import com.paola.ligabetplay.models.Partido;
 
 public class Menu {
+    ArrayList<Equipo> equipos = new ArrayList<>();
+    ArrayList<Partido> partidos = new ArrayList<>();
 
     static String listaMenuP = """
         1. Registrar Equipo
@@ -33,13 +36,17 @@ public class Menu {
             eleccion = sc.nextInt();
             switch (eleccion) {
                 case 1:
-                    funciones.registrarEquipo();
+                    equipos = funciones.registrarEquipo();
                     break;
                 case 2:
-                    funciones.registrarPartido();
+                    partidos = funciones.registrarPartido();
                     break;
                 case 3:
-                    mostrarMenuR();
+                    if (equipos.isEmpty() || partidos.isEmpty()) {
+                        System.out.println("No se encuentran equipos/partidos registrados");
+                    } else {
+                        mostrarMenuR(equipos, partidos);
+                    }
                     break;
                 case 4:
                     System.out.println("GRACIAS POR USAR EL SERVICIO");
@@ -56,7 +63,9 @@ public class Menu {
         System.out.println(listaMenuP);
     }
 
-    public void mostrarMenuR() {
+    public void mostrarMenuR(ArrayList<Equipo> equipos, ArrayList<Partido> partidos) {
+        // System.out.println("Tamaño equipos: " + equipos.size());
+        // System.out.println("Tamaño partidos: " + partidos.size());
         Scanner sc = new Scanner(System.in);
         Function funciones = new Function();
         int eleccion;
@@ -66,19 +75,19 @@ public class Menu {
             eleccion = sc.nextInt();
             switch (eleccion) {
                 case 1:
-                    // funciones.equipoMasGoles();
+                    funciones.equipoMasGoles(equipos);
                     break;
                 case 2:
-                    System.out.println("2");
+                    funciones.equipoMasPuntos(equipos);
                     break;
                 case 3:
-                    System.out.println("3");
+                    funciones.equipoMasPartidosGanados(equipos);
                     break;
                 case 4:
-                    System.out.println("4");
+                    funciones.totalGoles(equipos);
                     break;
                 case 5:
-                    System.out.println("5");
+                    funciones.promedioGoles(equipos);
                     break;
                 case 6:
                     break;
